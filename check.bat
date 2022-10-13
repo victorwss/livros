@@ -1,0 +1,1 @@
+python -m mypy --strict livros.py
