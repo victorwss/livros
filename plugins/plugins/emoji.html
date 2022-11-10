@@ -1,0 +1,27 @@
+{% macro emoji(config_file, emoji_folder) -%}
+<style>
+    .emoji {
+        color: rgba(0, 0, 0, 0);
+        display: inline-block;
+        vertical-align: bottom;
+        height: 1em;
+        width: 1em;
+        margin: 0;
+        padding: 0;
+        background-repeat: no-repeat;
+        background-size: 1em 1em;
+    }
+</style>
+<script type="module">
+    "use strict";
+    (() => {
+        const emojis = {% include config_file %};
+        let html = document.body.innerHTML;
+        for (let emoji in emojis) {
+            const div = `<div class="emoji" style="background-image: url({{emoji_folder}}/${emojis[emoji]});">${emoji}</div>`;
+            html = html.replaceAll(emoji, div);
+        }
+        document.body.innerHTML = html;
+    })();
+</script>
+{%- endmacro %}

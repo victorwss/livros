@@ -1,0 +1,12 @@
+1. Instalar o Python.
+2. Instalar o Webdriver do Firefox do Selenium: https://github.com/mozilla/geckodriver/releases
+-- Colocar o arquivo geckodriver.exe na mesma pasta do livros.exe
+-- Já foi colocado no GitHub do projeto também.
+3. Instalar o GTK do Windows: https://github.com/tschoonj/GTK-for-Windows-Runtime-Environment-Installer
+-- A instalação é realizada na pasta "C:\Program Files\GTK3-Runtime Win64"
+4. Instalar o mypy com o comando "pip installl mypy"
+5. Instalar o weasyprint com o comando "pip install weasyprint"
+6. Instalar o Flask com o comando "pip install flask"
+7. Instalar o Selenium para Python com o comando "pip install selenium"
+
+O HighlightJS e o MathJax não precisam ser instalados de forma explícita.

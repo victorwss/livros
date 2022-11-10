@@ -1,0 +1,14 @@
+{% macro capitular(selector, capitular) -%}
+<script type="module">
+    "use strict";
+    (() => {
+        const ps = document.querySelectorAll("{{selector}}");
+        for (let i = 0; i < ps.length; i++) {
+            const e = ps[i];
+            const primeiraLetra = e.innerHTML[0];
+            const resto = e.innerHTML.substring(1);
+            e.innerHTML = `<span class="{{capitular}}">${primeiraLetra}</span>${resto}`;
+        }
+    })();
+</script>
+{%- endmacro %}
