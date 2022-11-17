@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Compilador de livros</title>
+    <style>
+      #arrow {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        text-align: right;
+      }
+    </style>
+    <script>
+      let ajax = null;
+      let interval = null;
+
+      function esperaJob() {
+        if (ajax !== null && ajax.readyState !== 4) return;
+        ajax = new XMLHttpRequest();
+        ajax.open("GET", "{{ url_for('status', arq = codigo) }}");
+        ajax.onload = function() {
+          if (ajax.status === 0) return;
+          try {
+            if (ajax.status === 201 || ajax.status === 202) {
+              const response = JSON.parse(ajax.responseText);
+              let ulInner = "";
+              for (let idx = 0; idx < response.length; idx++) {
+                ulInner += `<li>${response[idx]}</li>`;
+              }
+              if (ajax.status === 201) {
+                ulInner += `<li><a href="{{ url_for('download', arq = codigo) }}">Download</a></li>`;
+              }
+              document.getElementById("log").innerHTML = ulInner;
+              if (ajax.status === 201) {
+                clearInterval(interval);
+                download();
+              }
+            } else {
+              clearInterval(interval);
+              document.getElementById("log").innerHTML = `<li>ERRO: [${ajax.status}] ${ajax.responseText}</li>`;
+            }
+          } catch (x) {
+            clearInterval(interval);
+            document.getElementById("log").innerHTML = `<li>ERRO: [${ajax.status}] ${ajax.responseText} ${x}</li>`;
+          }
+        };
+        ajax.send();
+      }
+
+      interval = setInterval(esperaJob, 1000);
+
+      function download() {
+        document.getElementById("arrow").style.display = "inline-block";
+        window.location = "{{ url_for('download', arq = codigo) }}";
+      }
+    </script>
+  </head>
+  <body>
+    <ul id="log">
+    </ul>
+    <div id="arrow">
+      <img src="{{ url_for('static', filename = 'up-arrow.png') }}">
+      <div>Veja o download do ZIP.</div>
+    </div>
+  </body>
+</html>

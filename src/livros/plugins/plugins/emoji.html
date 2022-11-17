@@ -10,6 +10,7 @@
         padding: 0;
         background-repeat: no-repeat;
         background-size: 1em 1em;
+        overflow: hidden;
     }
 </style>
 <script type="module">
@@ -18,7 +19,7 @@
         const emojis = {% include config_file %};
         let html = document.body.innerHTML;
         for (let emoji in emojis) {
-            const div = `<div class="emoji" style="background-image: url({{emoji_folder}}/${emojis[emoji]});">${emoji}</div>`;
+            const div = `<div class="emoji" style="background-image: url({{emoji_folder}}/${emojis[emoji].path});">${emojis[emoji].value}</div>`;
             html = html.replaceAll(emoji, div);
         }
         document.body.innerHTML = html;

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Compilador de livros</title>
+  </head>
+  <body>
+    <form id="upload-form" method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+      <label for="zip">Faça o upload do seu arquivo ZIP</label>
+      <input id="zip" type="file" name="zip" />
+      <button type="submit">Enviar</button>
+    </form>
+  </body>
+</html>

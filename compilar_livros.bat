@@ -1,0 +1,1 @@
+.\venv\Scripts\python -m livros compilar_livros %*
